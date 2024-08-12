@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://db.onlinewebfonts.com/c/b726729b4c955cc38d78cfea835f7d98?family=CF+Anarchy+Regular" rel="stylesheet"> 
+    <link href="https://db.onlinewebfonts.com/c/982eef02eaef7b6dc99e02380f2c201c?family=Diediedie" rel="stylesheet"> 
+    <link href="https://db.onlinewebfonts.com/c/3871f57c8c6af83dfa0674ee7399cb7d?family=Freakshow" rel="stylesheet"> 
+    <title>Audio Deepfake Predictor</title>
+    <style>
+        @import url(https://db.onlinewebfonts.com/c/b726729b4c955cc38d78cfea835f7d98?family=CF+Anarchy+Regular); 
+        @import url(https://db.onlinewebfonts.com/c/982eef02eaef7b6dc99e02380f2c201c?family=Diediedie); 
+        @import url(https://db.onlinewebfonts.com/c/3871f57c8c6af83dfa0674ee7399cb7d?family=Freakshow); 
+
+@font-face {
+    font-family: "CF Anarchy Regular";
+    src: url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.eot");
+    src: url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/b726729b4c955cc38d78cfea835f7d98.svg#CF Anarchy Regular")format("svg");
+}
+@font-face {
+    font-family: "Diediedie";
+    src: url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.eot");
+    src: url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/982eef02eaef7b6dc99e02380f2c201c.svg#Diediedie")format("svg");
+}
+@font-face {
+    font-family: "Freakshow";
+    src: url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.eot");
+    src: url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/3871f57c8c6af83dfa0674ee7399cb7d.svg#Freakshow")format("svg");
+}
+
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    background-image: url("bg.png");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+.container {
+    position: relative;
+    /* width: 100%; */
+    height: 118%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10;
+    width: 46%; /* Adjust as needed */
+    transform: rotate(4deg); 
+    background-color: transparent;
+}
+.upload-box {
+    background-color: transparent;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    width: 40%; /* Ensure full width within container */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+.button {
+    background-color: #000;
+    color: white;
+    border: 2px solid #fff;
+    padding: 8px 70px;
+    font-size: 36px;
+    border-radius: 75px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
+    font-family: "Diediedie"; 
+}
+#file-input {
+    display: none;
+}
+#file-info {
+    margin-top: 20px;
+}
+#clear-button {
+    background-color: transparent;
+    color: #ff4136;
+    border: 1px solid #ff4136;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#prediction-result {
+    display: none;
+    position: relative;
+    width: 100%; /* Match width of upload-box */
+}
+.result-box {
+    background-color: transparent;
+    padding: 0px; /* Match padding of upload-box */
+    border-radius: 10px;
+    /* border: 2px solid rgba(255, 255, 255, 0.2); */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    height: 100%; /* Ensure full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.foreal{
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0;
+    font-family: "CF Anarchy Regular";  
+    /* margin-bottom: 5px; */
+}
+.questionM{
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0;
+    font-family: "Freakshow"; 
+    /* margin-bottom: 5px; */
+}
+#prediction-percentage {
+    font-size: 55px;
+    font-weight: bold;
+    margin: 0;
+    font-family: "Freakshow";  
+    
+}
+.prediction-text {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.highlight {
+    color: #ff4136 ; /* Base color */
+    text-shadow: 0 0 15px  #C70039 , 0 0 25px #C70039 , 0 0 35px  #C70039 , 0 0 35px  #C70039 ;
+}
+
+.reset-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4136;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    
+}
+.light-beam {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+}
+#file-info, #predict-button, #prediction-result {
+    display: none; /* Hide these elements initially */
+}
+    </style>
+   
+</head>
+<body>
+    <div class="container">
+        <div class="light-beam"></div>
+        <div class="upload-box">
+            <div id="upload-section">
+                <h1 class="foreal">For Real<span class="questionM">?</span></h1>
+                <p class="prediction-text"><span class="highlight">An Audio Deepfake Detection System</span> </p>
+                <button id="upload-button" class="button" onclick="document.getElementById('file-input').click()">UPLOAD</button>
+                <input type="file" id="file-input" accept="audio/*" onchange="handleFileUpload(this.files)">
+                <div id="file-info">
+                    <span id="file-name"></span>
+                    <button id="clear-button" onclick="clearFile()">✕</button>
+                </div>
+                <button id="predict-button" class="button" onclick="predict()">PREDICT</button>
+            </div>
+            <div id="prediction-result">
+                <div class="result-box">
+                    <p id="prediction-percentage">98.30</p>
+                    <p class="prediction-text">There is a <span class="highlight">98.30%</span> chance that your audio is <span class="highlight">deepfake</span></p>
+                </div>
+                <button class="reset-button" onclick="resetPage()">↻</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+function handleFileUpload(files) {
+    if (files.length > 0) {
+        const file = files[0];
+        document.getElementById('file-name').textContent = file.name;
+        document.getElementById('file-info').style.display = 'block';
+        document.getElementById('upload-button').style.display = 'none';
+        document.getElementById('predict-button').style.display = 'inline-block';
+    }
+}
+
+function clearFile() {
+    document.getElementById('file-input').value = '';
+    document.getElementById('file-info').style.display = 'none';
+    document.getElementById('upload-button').style.display = 'inline-block';
+    document.getElementById('predict-button').style.display = 'none';
+}
+
+function predict() {
+    document.getElementById('upload-section').style.display = 'none';
+    document.getElementById('prediction-result').style.display = 'block';
+}
+
+function resetPage() {
+    document.getElementById('file-input').value = '';
+    document.getElementById('file-info').style.display = 'none';
+    document.getElementById('predict-button').style.display = 'none';
+    document.getElementById('prediction-result').style.display = 'none';
+    document.getElementById('upload-section').style.display = 'block';
+    document.getElementById('upload-button').style.display = 'inline-block';
+}
+    
+
+    </script>
+
+</body>
+</html>
