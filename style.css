@@ -1,3 +1,6 @@
+/* Itong Css wala naman masyadong need galawin adjust nalang if may need */
+
+/* Import font used */
 @import url(https://db.onlinewebfonts.com/c/b726729b4c955cc38d78cfea835f7d98?family=CF+Anarchy+Regular);
 @import url(https://db.onlinewebfonts.com/c/982eef02eaef7b6dc99e02380f2c201c?family=Diediedie);
 @import url(https://db.onlinewebfonts.com/c/3871f57c8c6af83dfa0674ee7399cb7d?family=Freakshow);
@@ -81,6 +84,7 @@
             format("svg");
 }
 
+/* Web content */
 body,
 html {
     margin: 0;
@@ -280,7 +284,7 @@ html {
 #prediction-result {
     display: none; /* Hide these elements initially */
 }
-/* Background image for laptops and desktops */
+/* Background image for laptops and desktops(for responsiveness) */
 @media only screen and (min-width: 1024px) {
     .background-container {
         background-image: url("LaptopBg.png");
