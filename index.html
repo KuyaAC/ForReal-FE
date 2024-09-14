@@ -24,6 +24,7 @@
             href="https://db.onlinewebfonts.com/c/696afcc0126c52a607d4ac8fb2ce0b90?family=Fishwrapper"
             rel="stylesheet"
         />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>For Real?</title>
     </head>
     <body>
@@ -102,6 +103,39 @@
                             <button class="reset-button" onclick="resetPage()">
                                 ↻
                             </button>
+                            <button id="info-button">?</button>
+                            <div id="info-popup">
+                                <p>
+                                    For Real?: A Hybrid Approach to Audio
+                                    Deepfake Detection in Noisy Real-World
+                                    Environments
+                                </p>
+                                <p class="authors">
+                                    <a
+                                        href="https://www.facebook.com/allencarl.delasalas/"
+                                        target="_blank"
+                                        >Delas Alas</a
+                                    >
+                                    |
+                                    <a
+                                        href="https://www.facebook.com/einahji"
+                                        target="_blank"
+                                        >Iraga</a
+                                    >
+                                    |
+                                    <a
+                                        href="https://www.facebook.com/CJPaRoChA"
+                                        target="_blank"
+                                        >Parocha</a
+                                    >
+                                    |
+                                    <a
+                                        href="https://www.facebook.com/hyejooooooooo"
+                                        target="_blank"
+                                        >San Jose</a
+                                    >
+                                </p>
+                            </div>
                         </div>
                         <!-- Animation loading shits -->
                         <div id="loading" class="loading" style="display: none">
@@ -144,6 +178,19 @@
                         >San Jose</a
                     >
                 </p>
+            </div>
+            <div class="fixed-top-right">
+                <div class="dropdown">
+                    <h1><span class="highlight">Choose a Model:</span></h1>
+                    <ul>
+                        <li data-value="#5790E6">
+                            <b>Base Model </b> by the internet
+                        </li>
+                        <li data-value="d40000">
+                            <b>For Real Model</b> by Team 11
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <script>
@@ -226,6 +273,21 @@
             //     document.getElementById("loading").style.display = "none";
             //     // ... existing code ...
             // }
+            //
+            $(document).ready(function () {
+                $(".dropdown ul li").click(function () {
+                    $(".dropdown ul li").each(function () {
+                        if ($(this).hasClass("selected")) {
+                            $(this).removeClass("selected");
+                        }
+                    });
+                    $(this).addClass("selected");
+                    $(".dropdown h1")
+                        .html($(this).html())
+                        .removeClass()
+                        .addClass("selected-" + ($(this).index() + 1));
+                });
+            });
         </script>
     </body>
 </html>
