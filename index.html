@@ -100,41 +100,23 @@
                                     <!-- Papalitan yung deepfake depende sa output ng model -->
                                 </p>
                             </div>
+
                             <button class="reset-button" onclick="resetPage()">
                                 ↻
                             </button>
-                            <button id="info-button">?</button>
-                            <div id="info-popup">
-                                <p>
-                                    For Real?: A Hybrid Approach to Audio
-                                    Deepfake Detection in Noisy Real-World
-                                    Environments
-                                </p>
-                                <p class="authors">
-                                    <a
-                                        href="https://www.facebook.com/allencarl.delasalas/"
-                                        target="_blank"
-                                        >Delas Alas</a
-                                    >
-                                    |
-                                    <a
-                                        href="https://www.facebook.com/einahji"
-                                        target="_blank"
-                                        >Iraga</a
-                                    >
-                                    |
-                                    <a
-                                        href="https://www.facebook.com/CJPaRoChA"
-                                        target="_blank"
-                                        >Parocha</a
-                                    >
-                                    |
-                                    <a
-                                        href="https://www.facebook.com/hyejooooooooo"
-                                        target="_blank"
-                                        >San Jose</a
-                                    >
-                                </p>
+                            <!----------------------------------------------- BAGOOOO sa MORE INFO PART!! ----------------------------------------------->
+                            <button id="moreInfo-btn">?</button>
+                            <div id="mInfoPop">
+                                <h3>Feature Importance Analysis:</h3>
+                                <p>CQT Features: 13.99%</p>
+                                <p>GFCC Features: 2.99%</p>
+
+                                <h3>Top 5 Important Features:</h3>
+                                <p>Feature 543 (WavLM): 4.12%</p>
+                                <p>Feature 779 (CQT): 2.28%</p>
+                                <p>Feature 545 (WavLM): 1.67%</p>
+                                <p>Feature 724 (WavLM): 0.96%</p>
+                                <p>Feature 780 (CQT): 0.9%</p>
                             </div>
                         </div>
                         <!-- Animation loading shits -->
@@ -179,16 +161,15 @@
                     >
                 </p>
             </div>
+            <!------------------------------------------------------------------------------ MODEL PICKER PART ----------------------------------------------->
             <div class="fixed-top-right">
                 <div class="dropdown">
-                    <h1><span class="highlight">Choose a Model:</span></h1>
+                    <h1 class="ModelTitle">
+                        <span class="highlight">Choose a Model:</span>
+                    </h1>
                     <ul>
-                        <li data-value="#5790E6">
-                            <b>Base Model </b> by the internet
-                        </li>
-                        <li data-value="d40000">
-                            <b>For Real Model</b> by Team 11
-                        </li>
+                        <li><b>Base Model </b> by the internet</li>
+                        <li><b>For Real Model</b> by Team 11</li>
                     </ul>
                 </div>
             </div>
@@ -237,18 +218,31 @@
                 document.getElementById("upload-button").style.display =
                     "inline-block";
             }
+
             const infoButton = document.getElementById("info-button");
             const infoPopup = document.getElementById("info-popup");
+            const moreInfoBtn = document.getElementById("moreInfo-btn");
+            const mInfoPop = document.getElementById("mInfoPop");
 
-            infoButton.addEventListener("click", () => {
+            function toggleVisibility(element) {
                 if (
-                    infoPopup.style.display === "none" ||
-                    infoPopup.style.display === ""
+                    element.style.display === "none" ||
+                    element.style.display === ""
                 ) {
-                    infoPopup.style.display = "block";
+                    element.style.display = "block";
                 } else {
-                    infoPopup.style.display = "none";
+                    element.style.display = "none";
                 }
+            }
+
+            // Event listener for the info button
+            infoButton.addEventListener("click", () => {
+                toggleVisibility(infoPopup);
+            });
+
+            // Event listener for the moreInfo button
+            moreInfoBtn.addEventListener("click", () => {
+                toggleVisibility(mInfoPop);
             });
 
             // ito yung loading shits para may konting dating habang na loload yung model ng prediction nya
