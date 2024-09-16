@@ -104,7 +104,7 @@
                             <button class="reset-button" onclick="resetPage()">
                                 ↻
                             </button>
-                            <!----------------------------------------------- BAGOOOO sa MORE INFO PART!! ----------------------------------------------->
+                            <!----------------------------------------------- ADDITION: MORE INFO PART!! ----------------------------------------------->
                             <button id="moreInfo-btn">?</button>
                             <div id="mInfoPop">
                                 <h3>Feature Importance Analysis:</h3>
@@ -133,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            <!-- UPDATE: ADD FB Links -->
             <button id="info-button">i</button>
             <div id="info-popup">
                 <p>
@@ -161,7 +162,7 @@
                     >
                 </p>
             </div>
-            <!------------------------------------------------------------------------------ MODEL PICKER PART ----------------------------------------------->
+            <!------------------------------------------------------------------------------ ADDITION: MODEL PICKER PART ----------------------------------------------->
             <div class="fixed-top-right">
                 <div class="dropdown">
                     <h1 class="ModelTitle">
@@ -218,7 +219,7 @@
                 document.getElementById("upload-button").style.display =
                     "inline-block";
             }
-
+            // UPDATED: Add more info
             const infoButton = document.getElementById("info-button");
             const infoPopup = document.getElementById("info-popup");
             const moreInfoBtn = document.getElementById("moreInfo-btn");
@@ -262,12 +263,7 @@
                         "block";
                 }, 2000); // Adjust the timeout duration as needed
             }
-            // function resetPage() {
-            //     // ... existing code ...
-            //     document.getElementById("loading").style.display = "none";
-            //     // ... existing code ...
-            // }
-            //
+            // ADDITION: SCRIPT of MODEL picker
             $(document).ready(function () {
                 $(".dropdown ul li").click(function () {
                     $(".dropdown ul li").each(function () {
