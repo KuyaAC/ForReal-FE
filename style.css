@@ -366,7 +366,7 @@ html {
     display: none;
     position: fixed;
     top: 50%;
-    left: 78%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
     padding: 20px;
@@ -375,6 +375,7 @@ html {
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     color: black;
+    z-index: 9999;
 }
 
 #mInfoPop p {
@@ -384,6 +385,12 @@ html {
 #mInfoPop {
     color: black;
     font-size: 0.9em;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 
 #info-popup {
@@ -1075,3 +1082,5 @@ html {
 .dropdown li:nth-child(5) {
     transition-delay: 0.4s, 0s;
 }
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ POP UP MODEL MORE DETAILS ******************************************************/

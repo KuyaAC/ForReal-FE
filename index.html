@@ -105,12 +105,12 @@
                                 ↻
                             </button>
                             <!----------------------------------------------- ADDITION: MORE INFO PART!! ----------------------------------------------->
-                            <button id="moreInfo-btn">?</button>
-                            <div id="mInfoPop">
+                            <button id="moreInfo-btn"><b>?</b></button>
+                            <div id="mInfoPop" class="popup">
+                                <span class="close-btn">&times;</span>
                                 <h3>Feature Importance Analysis:</h3>
                                 <p>CQT Features: 13.99%</p>
                                 <p>GFCC Features: 2.99%</p>
-
                                 <h3>Top 5 Important Features:</h3>
                                 <p>Feature 543 (WavLM): 4.12%</p>
                                 <p>Feature 779 (CQT): 2.28%</p>
@@ -224,6 +224,7 @@
             const infoPopup = document.getElementById("info-popup");
             const moreInfoBtn = document.getElementById("moreInfo-btn");
             const mInfoPop = document.getElementById("mInfoPop");
+            const closeButtons = document.querySelectorAll(".close-btn");
 
             function toggleVisibility(element) {
                 if (
@@ -236,14 +237,20 @@
                 }
             }
 
-            // Event listener for the info button
-            infoButton.addEventListener("click", () => {
-                toggleVisibility(infoPopup);
-            });
+            infoButton.addEventListener("click", () =>
+                toggleVisibility(infoPopup),
+            );
+            moreInfoBtn.addEventListener("click", () =>
+                toggleVisibility(mInfoPop),
+            );
 
-            // Event listener for the moreInfo button
-            moreInfoBtn.addEventListener("click", () => {
-                toggleVisibility(mInfoPop);
+            closeButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    const popup = button.closest(".popup");
+                    if (popup) {
+                        popup.style.display = "none";
+                    }
+                });
             });
 
             // ito yung loading shits para may konting dating habang na loload yung model ng prediction nya
