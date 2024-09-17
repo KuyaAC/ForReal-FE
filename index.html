@@ -226,14 +226,21 @@
             const mInfoPop = document.getElementById("mInfoPop");
             const closeButtons = document.querySelectorAll(".close-btn");
 
+            // Create a new div for the blur overlay
+            const blurOverlay = document.createElement("div");
+            blurOverlay.classList.add("blur-overlay");
+            document.body.appendChild(blurOverlay);
+
             function toggleVisibility(element) {
                 if (
                     element.style.display === "none" ||
                     element.style.display === ""
                 ) {
                     element.style.display = "block";
+                    blurOverlay.style.display = "block"; // Show blur overlay
                 } else {
                     element.style.display = "none";
+                    blurOverlay.style.display = "none"; // Hide blur overlay
                 }
             }
 
@@ -249,8 +256,16 @@
                     const popup = button.closest(".popup");
                     if (popup) {
                         popup.style.display = "none";
+                        blurOverlay.style.display = "none"; // Hide blur overlay
                     }
                 });
+            });
+
+            // Close popup when clicking on blur overlay
+            blurOverlay.addEventListener("click", () => {
+                infoPopup.style.display = "none";
+                mInfoPop.style.display = "none";
+                blurOverlay.style.display = "none";
             });
 
             // ito yung loading shits para may konting dating habang na loload yung model ng prediction nya
